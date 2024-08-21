@@ -1,0 +1,74 @@
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+struct stack
+{
+int size;
+int top;
+int *arr;
+};
+int full(struct stack *ptr)
+{
+if(ptr->top==ptr->size-1)
+{
+return 1;
+}
+else
+{
+return 0;
+}
+}
+int empty(struct stack *ptr)
+{
+if(ptr->top==-1)
+{
+return 1;
+}
+else
+{
+return 0;
+}
+}
+void push(struct stack *ptr,int val)
+{
+if(full(ptr))
+{
+printf("stack overflow!");
+}
+else
+{
+ptr->top++;
+ptr->arr[ptr->top]=val;
+}
+}
+int peek(struct stack *ptr,int i)
+{
+int ind=ptr->top-i+1;
+if(ind<0)
+{
+printf("index invalid!");
+}
+return ptr->arr[ind];
+}
+void main()
+{
+struct stack *s=(struct stack*)malloc(sizeof(struct stack));
+clrscr();
+s->size=5;
+s->top=-1;
+s->arr=(int*)malloc(s->size*sizeof(int));
+printf("stack is full before the pushing %d\n",full(s));
+printf("stack is empty before thr pushing %d\n",empty(s));
+push(s,6);
+push(s,7);
+push(s,12);
+push(s,34);
+push(s,90);
+printf("stack is full after the pushing %d\n",full(s));
+printf("stack is empty after the pushing %d\n",empty(s));
+for(int i=1;i<=s->top+1;i++)
+{
+printf("the %d is at %d\n",peek(s,i),i);
+}
+getch();
+}
